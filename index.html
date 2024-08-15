@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/aos.css">
-    <link rel="stylesheet" href="/css/line-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/line-awesome.min.css">
 
     <link rel="stylesheet" href="style.css">
     <!--emailto account-->
@@ -75,6 +75,30 @@ function validate() {
 
     return true;  // All validations passed
 }
+    function sendMail(event) {
+    event.preventDefault(); // Prevent form submission and page refresh
+
+    if (!validate()) {
+        return; // Stop if validation fails
+    }
+
+    var params = {
+        name: document.getElementById("uname").value,
+        email: document.getElementById("email").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value
+    };
+
+    emailjs.send("service_y1tf12z", "template_8o4fg4c", params)
+    .then(function(res) {
+        alert("Success! Email sent. Status: " + res.status);
+        document.querySelector("form").reset(); // Optionally reset the form
+    })
+    .catch(function(error) {
+        console.error("EmailJS Error:", error); // Log the error to the console
+        alert("Failed to send email. Please try again.");
+    });
+  }
 </script>
 
 
@@ -251,7 +275,7 @@ function validate() {
       </div>
 
       <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
-        <form onclick="return sendMail(event);" onsubmit="return validate();"  method="POST" class="row g-lg-3 gy-3">
+        <form  onsubmit="sendMail(event);"  method="POST" class="row g-lg-3 gy-3">
           <div class="form-group col-md-6">
             <input id="uname" type="text" class="form-control" placeholder="Enter Your Name">
           </div>
@@ -305,10 +329,10 @@ function validate() {
  <!--//CONTENT WRAPPER--> 
  
 </script> 
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/aos.css"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/aos.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/aos.css"></script>
+    <script src="js/main.js"></script>
+    <script src="js/aos.js"></script>
     
     <script>
       AOS.init();
